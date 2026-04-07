@@ -27,3 +27,10 @@ export INFRA_AWS_PVM_BUILD_FLAKE_REF=git+file:///home/alex/workspace/spoke-sh/pv
 export INFRA_AWS_PVM_KERNEL_ATTR=packages.x86_64-linux.linux-port-pvm
 export INFRA_AWS_PVM_FIRECRACKER_ATTR=packages.x86_64-linux.firecracker-pvm
 ```
+
+Kernel contract notes:
+
+- AWS PVM hosts run K3s directly on this kernel, so kube-proxy and CNI hostport
+  flows need working xtables support.
+- Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
+  `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
