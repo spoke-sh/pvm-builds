@@ -32,5 +32,8 @@ Kernel contract notes:
 
 - AWS PVM hosts run K3s directly on this kernel, so kube-proxy and CNI hostport
   flows need working xtables support.
+- AWS PVM hosts must expose the host-side PVM path, not just guest support.
+  Keep `CONFIG_EXPERT=y`, `CONFIG_KVM=y`, `CONFIG_KVM_SW_PROTECTED_VM=y`, and
+  `CONFIG_KVM_PVM=y` enabled when rebasing the kernel.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
