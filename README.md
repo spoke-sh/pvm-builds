@@ -6,6 +6,7 @@ This repo exists to export the exact flake attrs that `infra` expects in its
 `prod.env` and AWS image pipeline:
 
 - `packages.x86_64-linux.linux-port-pvm`
+- `packages.x86_64-linux.linux-port-pvm-guest`
 - `packages.x86_64-linux.firecracker-pvm`
 
 Current upstream sources:
@@ -19,6 +20,8 @@ contract:
 - Port owns the host-kit contract and NixOS module surface
 - `pvm-builds` owns the concrete patched kernel and VMM derivations
 - `infra` consumes those derivations to build and import the AWS AMI
+- Port's hosted PVM guest artifact pipeline can also consume the dedicated
+  `linux-port-pvm-guest` derivation for `x86_64/firecracker/pvm`
 
 Typical downstream wiring:
 
@@ -35,5 +38,9 @@ Kernel contract notes:
 - AWS PVM hosts must expose the host-side PVM path, not just guest support.
   Keep `CONFIG_EXPERT=y`, `CONFIG_KVM=y`, `CONFIG_KVM_SW_PROTECTED_VM=y`, and
   `CONFIG_KVM_PVM=y` enabled when rebasing the kernel.
+- PVM guests need a separate kernel contract from the host image. Keep
+  `CONFIG_X86_PIE=y` and `CONFIG_PVM_GUEST=y` enabled for the
+  `linux-port-pvm-guest` derivation so the guest lane does not silently reuse
+  the standard Firecracker kernel.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.

@@ -29,13 +29,16 @@
         linux-port-pvm = pkgs.callPackage ./pkgs/linux-port-pvm.nix {
           inherit linux-pvm-src;
         };
+        linux-port-pvm-guest = pkgs.callPackage ./pkgs/linux-port-pvm-guest.nix {
+          inherit linux-pvm-src;
+        };
         firecracker-pvm = pkgs.callPackage ./pkgs/firecracker-pvm.nix {
           src = firecracker-pvm-src;
         };
       in
       {
         packages = {
-          inherit linux-port-pvm firecracker-pvm;
+          inherit linux-port-pvm linux-port-pvm-guest firecracker-pvm;
           default = firecracker-pvm;
         };
 
