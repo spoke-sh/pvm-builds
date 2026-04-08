@@ -42,5 +42,9 @@ Kernel contract notes:
   `CONFIG_X86_PIE=y` and `CONFIG_PVM_GUEST=y` enabled for the
   `linux-port-pvm-guest` derivation so the guest lane does not silently reuse
   the standard Firecracker kernel.
+- Firecracker guests on the PVM lane still surface block, net, and vsock
+  devices over `virtio_mmio`, so keep `CONFIG_VIRTIO_MMIO=y` and
+  `CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y` enabled for the
+  `linux-port-pvm-guest` derivation.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
