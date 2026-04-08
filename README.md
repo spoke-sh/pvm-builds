@@ -52,6 +52,14 @@ Kernel contract notes:
   `CONFIG_BRIDGE=y`, `CONFIG_BRIDGE_NETFILTER=y`,
   `CONFIG_NET_UDP_TUNNEL=y`, `CONFIG_VXLAN=y`, and `CONFIG_VETH=y` enabled for
   the `linux-port-pvm-guest` derivation.
+- Hosted K3s guests also need the full kube-proxy and flannel netfilter
+  surface as built-ins, because these minimal guest images do not ship
+  `/lib/modules`. Keep the nftables families and NAT helpers enabled in-kernel
+  for the `linux-port-pvm-guest` derivation, including
+  `CONFIG_NF_TABLES_INET=y`, `CONFIG_NF_TABLES_IPV4=y`,
+  `CONFIG_NF_TABLES_IPV6=y`, `CONFIG_NFT_COMPAT=y`, `CONFIG_NFT_NAT=y`,
+  `CONFIG_NFT_MASQ=y`, `CONFIG_IP_NF_NAT=y`, and
+  `CONFIG_IP_NF_TARGET_MASQUERADE=y`.
 - Hosted K3s guests also need the standard container namespace surface. Keep
   `CONFIG_NAMESPACES=y`, `CONFIG_UTS_NS=y`, `CONFIG_IPC_NS=y`,
   `CONFIG_NET_NS=y`, `CONFIG_PID_NS=y`, `CONFIG_CGROUP_NS=y`, and
