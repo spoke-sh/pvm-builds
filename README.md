@@ -52,5 +52,10 @@ Kernel contract notes:
   `CONFIG_BRIDGE=y`, `CONFIG_BRIDGE_NETFILTER=y`,
   `CONFIG_NET_UDP_TUNNEL=y`, `CONFIG_VXLAN=y`, and `CONFIG_VETH=y` enabled for
   the `linux-port-pvm-guest` derivation.
+- Hosted K3s guests also need the standard container namespace surface. Keep
+  `CONFIG_NAMESPACES=y`, `CONFIG_UTS_NS=y`, `CONFIG_IPC_NS=y`,
+  `CONFIG_NET_NS=y`, `CONFIG_PID_NS=y`, `CONFIG_CGROUP_NS=y`, and
+  `CONFIG_TIME_NS=y` enabled for the `linux-port-pvm-guest` derivation so
+  containerd and kubelet can resolve `/proc/<pid>/ns/*` entries correctly.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
