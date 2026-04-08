@@ -45,6 +45,7 @@ Kernel contract notes:
 - Firecracker guests on the PVM lane still surface block, net, and vsock
   devices over `virtio_mmio`, so keep `CONFIG_VIRTIO_MMIO=y` and
   `CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y` enabled for the
-  `linux-port-pvm-guest` derivation.
+  `linux-port-pvm-guest` derivation, along with guest-side vsock support via
+  `CONFIG_VSOCKETS=y` and `CONFIG_VIRTIO_VSOCKETS=y`.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
