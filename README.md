@@ -47,5 +47,10 @@ Kernel contract notes:
   `CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y` enabled for the
   `linux-port-pvm-guest` derivation, along with guest-side vsock support via
   `CONFIG_VSOCKETS=y` and `CONFIG_VIRTIO_VSOCKETS=y`.
+- Hosted K3s on the PVM guest lane expects flannel VXLAN and standard pod
+  networking to work without a module-loading step. Keep `CONFIG_TUN=y`,
+  `CONFIG_BRIDGE=y`, `CONFIG_BRIDGE_NETFILTER=y`,
+  `CONFIG_NET_UDP_TUNNEL=y`, `CONFIG_VXLAN=y`, and `CONFIG_VETH=y` enabled for
+  the `linux-port-pvm-guest` derivation.
 - Keep `CONFIG_NETFILTER_XT_MATCH_STATISTIC=y` and
   `CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y` enabled when rebasing the kernel.
